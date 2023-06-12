@@ -1,7 +1,29 @@
+using Core.Interfaces;
+using Core.Services;
+using Intrastructure.Data;
+using Intrastructure.Data.Repositories;
 using MenuBE.Helpers;
+using Microsoft.EntityFrameworkCore;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.WithOrigins("https://localhost:4200").AllowAnyOrigin().AllowAnyHeader();
+                      });
+});
+// Add services to the container.
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<MenuContext>(x => x.UseSqlServer(connectionString));
 
+
+//DI
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IMenuService, MenuService>();
+builder.Services.AddTransient<IMenuRepository, MenuRepository>();
 // Add services to the container.
 
 builder.Services.AddControllers();

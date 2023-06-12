@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Entities;
+using Core.Interfaces;
 using MenuBE.Dtos;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -12,17 +13,25 @@ namespace MenuBE.Controllers
     public class MenusController : ControllerBase
     {
         private readonly IMapper _mapper;
-        public MenusController(IMapper mapper)
+        private readonly IMenuService _menuService;
+        public MenusController(IMapper mapper, IMenuService menuService)
         {
             _mapper = mapper;
+            _menuService = menuService;
         }
         [HttpPost]
         public async Task<IActionResult> Create(MenuCreateRequestDto dto)
         {
             var menu = _mapper.Map< MenuCreateRequestDto, Menu>(dto);
             menu.Id = Guid.NewGuid();
-
-            return Ok();
+            try
+            {
+                await _menuService.CreateAsync(menu);
+                return Ok();
+            } catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

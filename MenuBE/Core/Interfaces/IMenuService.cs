@@ -9,7 +9,7 @@ namespace Core.Interfaces
 {
     public interface IMenuService
     {
-        Task<bool> Create(Menu menu);
+        Task CreateAsync(Menu menu);
         Task<bool> Update(Guid Id, string name);
         Task<bool> Delete(Guid Id);
         Task<List<Menu>> GetAll();

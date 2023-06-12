@@ -15,16 +15,14 @@ namespace Core.Services
         private readonly MenuContext _context;
         private bool _disposed = false;
 
-        public IMenuRepository MenuRepository { get; }
         public UnitOfWork(MenuContext context)
         {
             _context = context;
-            MenuRepository = new MenuRepository(_context);
         }
 
-        public void Save()
+        public async Task SaveChangesAsync()
         {
-            _context.SaveChanges();
+             await _context.SaveChangesAsync();
         }
 
         public void Dispose()
