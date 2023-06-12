@@ -26,7 +26,6 @@ namespace Intrastructure.Data.Repositories
         public  async Task InsertAsync(Menu menu)
         {
             await _context.Menus.AddAsync(menu);
-            await _context.SaveChangesAsync();
         }
     }
 }

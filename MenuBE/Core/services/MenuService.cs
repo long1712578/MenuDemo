@@ -23,7 +23,7 @@ namespace Core.Services
             if(menu.ParentId is not null)
             {
                 var parentMenu = await _repository.FindAsync(menu.ParentId ?? Guid.Empty);
-                if(parentMenu == null) { throw new ArgumentException("ParentId not Found"); };
+                if(parentMenu == null) { throw new ArgumentException("ParentId not exist!!"); };
             }
             await _repository.InsertAsync(menu);
             await _unitOfWork.SaveChangesAsync();
