@@ -27,11 +27,22 @@ namespace MenuBE.Controllers
             try
             {
                 await _menuService.CreateAsync(menu);
-                return Ok();
+                return Ok(menu);
             } catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var menuDelete = await _menuService.DeleteAsync(id);
+            if(menuDelete) {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
     }
 }

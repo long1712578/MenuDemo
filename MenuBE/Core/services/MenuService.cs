@@ -3,6 +3,7 @@ using Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -29,9 +30,17 @@ namespace Core.Services
             await _unitOfWork.SaveChangesAsync();
         }
 
-        public Task<bool> Delete(Guid Id)
+        public async Task<bool> DeleteAsync(Guid Id)
         {
-            throw new NotImplementedException();
+            // Delete menu
+            var menu = await _repository.FindAsync(Id);
+            if (menu == null)
+            {
+                return false;
+            };
+            _repository.Delete(menu);
+            await _unitOfWork.SaveChangesAsync();
+            return true;
         }
 
         public Task<List<Menu>> GetAll()

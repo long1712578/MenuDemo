@@ -11,7 +11,7 @@ namespace Core.Interfaces
     {
         Task CreateAsync(Menu menu);
         Task<bool> Update(Guid Id, string name);
-        Task<bool> Delete(Guid Id);
+        Task<bool> DeleteAsync(Guid Id);
         Task<List<Menu>> GetAll();
 
     }
