@@ -15,7 +15,7 @@ namespace Intrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    ParentId = table.Column<int>(type: "int", nullable: true),
+                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDelete = table.Column<bool>(type: "bit", nullable: false),
                     MenuId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
