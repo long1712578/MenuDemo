@@ -12,7 +12,7 @@ namespace Core.Interfaces
         Task CreateAsync(Menu menu);
         Task<bool> UpdateAsync(Guid Id, string name);
         Task<bool> DeleteAsync(Guid Id);
-        Task<List<Menu>> GetAll();
+        Task<Tuple<int, List<Menu>>> GetAllAsync(int skipCount, int maxCount);
 
     }
 }

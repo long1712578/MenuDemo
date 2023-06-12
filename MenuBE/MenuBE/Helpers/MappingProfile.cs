@@ -8,7 +8,8 @@ namespace MenuBE.Helpers
     {
         public MappingProfile()
         {
-            CreateMap<Menu, MenuDto>();
+            CreateMap<Menu, MenuDto>()
+                .ForMember(dest =>dest.MenuDtos, o => o.MapFrom(x => x.Menus));
             CreateMap<MenuCreateRequestDto, Menu>();
         }
     }

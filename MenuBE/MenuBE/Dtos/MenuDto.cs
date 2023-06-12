@@ -8,6 +8,6 @@ namespace MenuBE.Dtos
         public Guid Id { get; set; }
         public string Name { get; set; }
         public Guid? ParentId { get; set; }
-        public List<Menu>? Menus { get; set; }
+        public List<MenuDto>? MenuDtos { get; set; }
     }
 }

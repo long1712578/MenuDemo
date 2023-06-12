@@ -55,5 +55,18 @@ namespace MenuBE.Controllers
             return BadRequest();
         }
 
+        [HttpGet]
+        public async Task<MenuPagingResultDto> GetMenuPaging([FromQuery] MenuPagingRequestDto dto)
+        {
+            var menus = _menuService.GetAllAsync(dto.SkipCount, dto.MaxCount);
+            var menuDtos = _mapper.Map<List<Menu>, List<MenuDto>>(menus.Result.Item2);
+            var menuPagingResultDto = new MenuPagingResultDto()
+            {
+                TotalCount = menus.Result.Item1,
+                Items = menuDtos
+            };
+            return menuPagingResultDto;
+        }
+
     }
 }

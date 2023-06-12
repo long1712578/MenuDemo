@@ -43,9 +43,9 @@ namespace Core.Services
             return true;
         }
 
-        public Task<List<Menu>> GetAll()
+        public async Task<Tuple<int, List<Menu>>> GetAllAsync(int skipCount, int maxCount)
         {
-            throw new NotImplementedException();
+            return await _repository.GetAllAsync(skipCount, maxCount);
         }
 
         public async Task<bool> UpdateAsync(Guid Id, string name)

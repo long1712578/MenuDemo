@@ -13,7 +13,7 @@ namespace Core.Entities
         [StringLength(100)]
         public string Name { get; set; }
         public Guid? ParentId { get; set; }
-        public List<Menu>? Menus { get; set; }
+        public List<Menu> Menus { get; set; } = new List<Menu>();
         public bool IsDelete { get; set; }
     }
 }

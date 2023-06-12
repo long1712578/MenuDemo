@@ -12,6 +12,6 @@ namespace Core.Interfaces
         Task InsertAsync(Menu menu);
         Task<Menu> FindAsync(Guid id);
         void Delete(Menu menu);
-        Task<Menu> GetAsync(Guid id);
+        Task<Tuple<int, List<Menu>>> GetAllAsync(int skipCount, int maxCount);
     }
 }

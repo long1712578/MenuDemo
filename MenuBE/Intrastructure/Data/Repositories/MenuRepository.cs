@@ -38,37 +38,42 @@ namespace Intrastructure.Data.Repositories
             return entity;
         }
 
-        public async Task<Menu> GetAsync(Guid id)
+        public async Task<Tuple<int, List<Menu>>> GetAllAsync(int skipCount, int maxCount)
         {
-            var entity = await _context.Menus.FindAsync(id);
-            //var subs = _context.Menus.Where(x => x.ParentId == id);
-            //var listMenu = new List<Menu>();
-            //foreach (var sub in subs)
-            //{
-            //    listMenu.Add(await GetSubAsync(sub));
-            //}
-            //entity.Menus.AddRange(listMenu);
-            return entity;
+            var queryable =  _context.Menus.Where(x=> x.ParentId == null).AsQueryable();
+            var totalCount = await queryable.CountAsync();
+            var menus = await queryable
+                .AsNoTracking()
+                .Skip(skipCount)
+                .Take(maxCount)
+                .ToListAsync();
+            // Get menu sub
+            var lstMenu = new List<Menu>();
+            foreach (var menu in menus)
+            {
+                lstMenu.Add(GetMenuSubAsync(menu));
+            }
+            return new Tuple<int, List<Menu>>(totalCount, lstMenu);
         }
-
-        //async Task<Menu> GetSubAsync(Menu entity)
-        //{
-        //    var subs =await  _context.Menus.Where(x => x.ParentId == entity.Id).ToListAsync();
-        //    if (subs.Count > 0)
-        //    {
-        //        var listMenu = new List<Menu>();
-        //        foreach (var sub in subs)
-        //        {
-        //            listMenu.Add(await GetSubAsync(sub));
-        //        }
-        //        entity.Menus.AddRange(listMenu);
-        //    }
-        //    return entity;
-        //}
 
         public  async Task InsertAsync(Menu menu)
         {
             await _context.Menus.AddAsync(menu);
+        }
+
+        private Menu GetMenuSubAsync(Menu menu)
+        {
+            var subs = _context.Menus.Where(x => x.ParentId == menu.Id).ToList();
+            var listSub = new List<Menu>();
+            if(subs.Count > 0)
+            {
+                foreach (var sub in subs)
+                {
+                    listSub.Add(GetMenuSubAsync(sub));
+                }
+                menu.Menus.AddRange(listSub);
+            }
+            return menu;
         }
     }
 }
