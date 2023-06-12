@@ -48,9 +48,16 @@ namespace Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<bool> Update(Guid Id, string name)
+        public async Task<bool> UpdateAsync(Guid Id, string name)
         {
-            throw new NotImplementedException();
+            var menu = await _repository.FindAsync(Id);
+            if (menu == null)
+            {
+                return false;
+            };
+            menu.Name = name;
+            await _unitOfWork.SaveChangesAsync();
+            return true;
         }
     }
 }

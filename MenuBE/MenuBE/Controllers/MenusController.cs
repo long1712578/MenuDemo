@@ -20,7 +20,7 @@ namespace MenuBE.Controllers
             _menuService = menuService;
         }
         [HttpPost]
-        public async Task<IActionResult> Create(MenuCreateRequestDto dto)
+        public async Task<IActionResult> Create([FromBody]MenuCreateRequestDto dto)
         {
             var menu = _mapper.Map< MenuCreateRequestDto, Menu>(dto);
             menu.Id = Guid.NewGuid();
@@ -39,6 +39,17 @@ namespace MenuBE.Controllers
         {
             var menuDelete = await _menuService.DeleteAsync(id);
             if(menuDelete) {
+                return Ok();
+            }
+            return BadRequest();
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update(Guid id, string name)
+        {
+            var menuUpdate = await _menuService.UpdateAsync(id, name);
+            if (menuUpdate)
+            {
                 return Ok();
             }
             return BadRequest();
