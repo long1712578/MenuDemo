@@ -44,6 +44,7 @@ namespace Intrastructure.Data.Repositories
             var totalCount = await queryable.CountAsync();
             var menus = await queryable
                 .AsNoTracking()
+                .OrderBy(x => x.Name)
                 .Skip(skipCount)
                 .Take(maxCount)
                 .ToListAsync();
