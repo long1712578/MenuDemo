@@ -28,4 +28,14 @@ export class AppService {
   getPagingMenus(skipCount: number, maxCount: number): Observable<Menus> {
     return this.http.get<Menus>(`${this.chatUrl}/api/Menus?SkipCount=${skipCount}&MaxCount=${maxCount}`);
   }
+  createMenu(menuName: string, parentId: string| null = null) : Observable<Menu> {
+    let body: any = {
+      name: menuName
+    };
+    if(parentId !== null) {
+
+      body = {...body, parentId}
+    }
+    return this.http.post<Menu>(`${this.chatUrl}/api/Menus`, body);
+  }
 }

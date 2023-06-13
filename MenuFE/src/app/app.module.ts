@@ -17,9 +17,12 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 import { MenusComponent } from './menus/menus.component';
 import { MenuItemComponent } from './menus/menu-item/menu-item.component';
+import { MenuInfomationComponent } from './menu-infomation/menu-infomation.component';
 
 registerLocaleData(en);
 
@@ -28,6 +31,7 @@ registerLocaleData(en);
     AppComponent,
     MenusComponent,
     MenuItemComponent,
+    MenuInfomationComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +43,8 @@ registerLocaleData(en);
     NzPaginationModule,
     NzButtonModule,
     NzIconModule,
+    NzModalModule,
+    NzInputModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -9,10 +9,12 @@ import { Menus } from './shared/models/menu';
 })
 export class AppComponent implements OnInit {
   skipCount = 0;
-  maxCount = 3;
+  maxCount = 6;
   pageIndex = 1;
   totalCount = 0;
   pageSizeOption = [3,6,9,12,15]
+  isAddMenu = false;
+  menuName='';
   constructor(private appService: AppService) {
   }
 
@@ -37,5 +39,25 @@ export class AppComponent implements OnInit {
   onPageSize(size: number) {
     this.maxCount = size;
     this.getPadingMenu();
+  }
+  showModalAddMenu(): void {
+    this.isAddMenu = true;
+  }
+  handleOk(): void {
+    this.isAddMenu = false;
+    this.appService.createMenu(this.menuName).subscribe({
+      next: () => {
+        this.getPadingMenu();
+        this.menuName = '';
+      },
+      error: () => {
+        this.menuName = '';
+      }
+    })
+  }
+
+  handleCancel(): void {
+    this.menuName = '';
+    this.isAddMenu = false;
   }
 }

@@ -1,11 +1,31 @@
-<app-menus></app-menus>
 
-<nz-pagination 
-  [nzPageIndex]="pageIndex"
-  [nzTotal]="totalCount"
-  nzShowSizeChanger
-  [nzPageSize]="maxCount"
-  [nzPageSizeOptions]="pageSizeOption"
-  (nzPageIndexChange)="onPageIndex($event)"
-  (nzPageSizeChange)="onPageSize($event)">
-</nz-pagination>
+<div class="container">
+
+  <!-- side -->
+  <div class="menuside">
+    <div>
+      <button (click)="showModalAddMenu()" nz-button nzType="primary" nzShape="round"><span nz-icon nzType="plus-circle"></span> Thêm</button>
+      <nz-modal [(nzVisible)]="isAddMenu" nzTitle="Thêm menu" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+          <input nz-input placeholder="Tên menu" [(ngModel)]="menuName" />
+        </ng-container>
+      </nz-modal>
+      <app-menus></app-menus>
+    </div>
+    <nz-pagination 
+      [nzPageIndex]="pageIndex"
+      [nzTotal]="totalCount"
+      nzShowSizeChanger
+      [nzPageSize]="maxCount"
+      [nzPageSizeOptions]="pageSizeOption"
+      (nzPageIndexChange)="onPageIndex($event)"
+      (nzPageSizeChange)="onPageSize($event)">
+    </nz-pagination>
+  </div>
+
+  <!-- content -->
+  <div class="content">
+    <app-menu-infomation></app-menu-infomation>
+  </div>
+
+</div>

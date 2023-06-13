@@ -1,10 +1,11 @@
-<button nz-button nzType="primary" nzShape="round"><span nz-icon nzType="download"></span></button>
-<ul nz-menu nzMode="inline">
-    <li nz-submenu nzTitle="Menu" nzIcon="appstore" nzOpen>
-        <ul>
-            <ng-container *ngFor="let menu of listMenu">
-                <app-menu-item [menu]="menu"></app-menu-item>
-            </ng-container>  
-        </ul>
-    </li>
-</ul>
+<div>
+    <ul nz-menu nzMode="inline">
+        <li nz-submenu nzTitle="Menu" nzIcon="appstore" nzOpen>
+            <ul>
+                <ng-container *ngFor="let menu of listMenu">
+                    <app-menu-item [menu]="menu"></app-menu-item>
+                </ng-container>  
+            </ul>
+        </li>
+    </ul>
+</div>

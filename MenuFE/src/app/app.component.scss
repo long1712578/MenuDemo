@@ -1,3 +1,18 @@
-[nz-menu] {
-    width: 240px;
-  }
+.container {
+  display: flex;
+  height: 100vh;
+}
+.menuside {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid;
+}
+[nzShowSizeChanger] {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+.content {
+
+}
