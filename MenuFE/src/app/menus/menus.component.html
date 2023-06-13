@@ -1,0 +1,9 @@
+<ul nz-menu nzMode="inline">
+    <li nz-submenu nzTitle="Menu" nzIcon="appstore">
+        <ul>
+            <ng-container *ngFor="let menu of listMenu">
+                <app-menu-item [menu]="menu"></app-menu-item>
+            </ng-container>  
+        </ul>
+    </li>
+</ul>
