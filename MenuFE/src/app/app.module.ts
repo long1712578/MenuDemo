@@ -15,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 // ng-zorro
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 import { MenusComponent } from './menus/menus.component';
 import { MenuItemComponent } from './menus/menu-item/menu-item.component';
@@ -34,7 +36,9 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     NzMenuModule,
-    NzPaginationModule
+    NzPaginationModule,
+    NzButtonModule,
+    NzIconModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
