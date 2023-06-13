@@ -13,6 +13,7 @@ export class AppService {
   listMenu$ = this.listMenuSubject.asObservable();
 
   chatUrl = '';
+  totalCount = 0;
   constructor(private http: HttpClient) { 
     this.chatUrl = environment.apiUrl;
   }

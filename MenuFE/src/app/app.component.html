@@ -1,1 +1,11 @@
 <app-menus></app-menus>
+
+<nz-pagination 
+  [nzPageIndex]="pageIndex"
+  [nzTotal]="totalCount"
+  nzShowSizeChanger
+  [nzPageSize]="maxCount"
+  [nzPageSizeOptions]="pageSizeOption"
+  (nzPageIndexChange)="onPageIndex($event)"
+  (nzPageSizeChange)="onPageSize($event)">
+</nz-pagination>
