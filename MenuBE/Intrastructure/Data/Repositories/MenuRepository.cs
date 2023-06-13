@@ -18,6 +18,11 @@ namespace Intrastructure.Data.Repositories
             _context = context;
         }
 
+        public async Task<bool> AnyAsync(Guid id)
+        {
+            return await _context.Menus.AnyAsync(x => x.Id == id);
+        }
+
         public void Delete(Menu menu)
         {
             var subs = _context.Menus.Where(x => x.ParentId == menu.Id).ToList();

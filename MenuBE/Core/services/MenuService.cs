@@ -21,10 +21,11 @@ namespace Core.Services
         }
         public async Task CreateAsync(Menu menu)
         {
-            if(menu.ParentId is not null)
+            if(menu.ParentId.HasValue)
             {
-                var parentMenu = await _repository.FindAsync(menu.ParentId ?? Guid.Empty);
-                if(parentMenu == null) { throw new ArgumentException("ParentId not exist!!"); };
+                if(!await _repository.AnyAsync(menu.ParentId.Value)) { 
+                    throw new ArgumentException("ParentId not exist!!"); 
+                };
             }
             await _repository.InsertAsync(menu);
             await _unitOfWork.SaveChangesAsync();
