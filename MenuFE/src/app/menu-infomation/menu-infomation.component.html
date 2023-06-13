@@ -1,4 +1,23 @@
 
-<div class="container-info">
-    <p>menu-infomation works!</p>
+<div *ngIf="menu; else emptyInfo" class="container-info">
+    <div>
+        <input required="true" nz-input placeholder="Tên menu" [(ngModel)]="name" [disabled]="isUpdateDisabled"/>
+    </div>
+    <div>
+          <button nz-button nzType="primary" nzShape="round">
+            <span nz-icon nzType="download"></span>
+           Thêm
+          </button>
+          <button nz-button nzType="primary"nzShape="round" nzDanger>
+            <span nz-icon nzType="download"></span>
+            Xóa
+          </button>
+          <button nz-button nzType="primary" nzShape="round" (click)="editMenu()">
+            <span nz-icon nzType="download"></span>
+            {{isUpdateDisabled ? 'Sửa' : 'Cập nhật'}}
+          </button>
+    </div>
 </div>
+<ng-template #emptyInfo>
+    <p>Chào mừng đến với Menu</p>
+</ng-template>

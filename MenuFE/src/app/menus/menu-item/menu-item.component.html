@@ -1,12 +1,12 @@
 <!-- SubMenu -->
-<li *ngIf="menu.menuDtos.length > 0; else menuItem" nz-submenu nzTitle="{{menu.name}}">
+<li *ngIf="menu.menuDtos.length > 0; else menuItem" nz-submenu nzTitle="{{menu.name}}" (click)="selecMenu(menu); $event.stopPropagation()">
     <ul *ngFor="let item of menu.menuDtos">
       <app-menu-item [menu]="item"></app-menu-item>
     </ul>
 </li>
 <!-- Menu-Item -->
 <ng-template #menuItem>
-    <li nz-menu-item>
+    <li nz-menu-item (click)="selecMenu(menu);$event.stopPropagation()">
         <div>
             {{menu.name}}
         </div>

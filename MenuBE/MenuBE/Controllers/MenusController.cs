@@ -45,7 +45,7 @@ namespace MenuBE.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(Guid id, string name)
+        public async Task<IActionResult> Update([FromQuery] Guid id, [FromQuery]string name)
         {
             var menuUpdate = await _menuService.UpdateAsync(id, name);
             if (menuUpdate)

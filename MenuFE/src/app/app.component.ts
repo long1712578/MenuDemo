@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
-import { Menus } from './shared/models/menu';
+import { Menu, Menus } from './shared/models/menu';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   pageSizeOption = [3,6,9,12,15]
   isAddMenu = false;
   menuName='';
+  menuActive!: Menu;
   constructor(private appService: AppService) {
   }
 
@@ -39,6 +40,10 @@ export class AppComponent implements OnInit {
   onPageSize(size: number) {
     this.maxCount = size;
     this.getPadingMenu();
+  }
+
+  getMenuActive(menuActive: Menu) {
+    this.menuActive = menuActive;
   }
   showModalAddMenu(): void {
     this.isAddMenu = true;

@@ -11,6 +11,8 @@ export class AppService {
 
   private listMenuSubject =  new BehaviorSubject<Menu[]>([]);
   listMenu$ = this.listMenuSubject.asObservable();
+  menuActiveSubject =new BehaviorSubject<Menu|null>(null);
+  menuActive$ = this.menuActiveSubject.asObservable();
 
   chatUrl = '';
   totalCount = 0;
@@ -25,6 +27,10 @@ export class AppService {
     this.listMenuSubject.next(menus);
   }
 
+  setMenuActive(menu: Menu) {
+    this.menuActiveSubject.next(menu);
+  }
+
   getPagingMenus(skipCount: number, maxCount: number): Observable<Menus> {
     return this.http.get<Menus>(`${this.chatUrl}/api/Menus?SkipCount=${skipCount}&MaxCount=${maxCount}`);
   }
@@ -37,5 +43,9 @@ export class AppService {
       body = {...body, parentId}
     }
     return this.http.post<Menu>(`${this.chatUrl}/api/Menus`, body);
+  }
+
+  updateMenu(id: string , name: string) : Observable<any> {
+    return this.http.put<any>(`${this.chatUrl}/api/Menus?id=${id}&name=${name}`,{});
   }
 }
