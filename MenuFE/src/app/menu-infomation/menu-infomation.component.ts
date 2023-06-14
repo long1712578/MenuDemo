@@ -50,7 +50,7 @@ export class MenuInfomationComponent implements OnInit {
   deleteMenu() {
     this.appService.deleteMenu(this.menu?.id as string ).subscribe({
       next: () => {
-        this.appService.setEventMenuDel(this.menu);
+        this.appService.setEventMenu(this.menu);
         this.menu = null;
       }
     })
@@ -65,9 +65,8 @@ export class MenuInfomationComponent implements OnInit {
     this.isAddMenu = false;
     this.appService.createMenu(this.menuName, this.menu?.id).subscribe({
       next: (menu) => {
-        const menuNew =menu;
-        this.menu?.menuDtos.push(menuNew);
         this.menuName = '';
+        this.appService.setEventMenu(this.menu);
       },
       error: () => {
         this.menuName = '';

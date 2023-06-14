@@ -21,13 +21,13 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPadingMenu();
-    this.listenEventMenuDel();
+    this.listenEventMenu();
   }
 
-  listenEventMenuDel() {
-    this.appService.onEventMenuDel$.subscribe({
-      next: (menuDel: Menu | null) => {
-        if(menuDel) {
+  listenEventMenu() {
+    this.appService.onEventMenu$.subscribe({
+      next: (menu: Menu | null) => {
+        if(menu) {
           this.getPadingMenu();
         }
       }

@@ -16,14 +16,14 @@ export class AppService {
 
   chatUrl = '';
   totalCount = 0;
-  onEventMenuDelSubject = new BehaviorSubject<Menu| null>(null);
-  onEventMenuDel$ = this.onEventMenuDelSubject.asObservable();
+  onEventMenuSubject = new BehaviorSubject<Menu| null>(null);
+  onEventMenu$ = this.onEventMenuSubject.asObservable();
   constructor(private http: HttpClient) { 
     this.chatUrl = environment.apiUrl;
   }
 
-  setEventMenuDel(menu: Menu | null) {
-    this.onEventMenuDelSubject.next(menu);
+  setEventMenu(menu: Menu | null) {
+    this.onEventMenuSubject.next(menu);
   }
 
   getListMenu() {
