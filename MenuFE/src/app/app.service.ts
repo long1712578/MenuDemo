@@ -16,8 +16,14 @@ export class AppService {
 
   chatUrl = '';
   totalCount = 0;
+  onEventMenuDelSubject = new BehaviorSubject<Menu| null>(null);
+  onEventMenuDel$ = this.onEventMenuDelSubject.asObservable();
   constructor(private http: HttpClient) { 
     this.chatUrl = environment.apiUrl;
+  }
+
+  setEventMenuDel(menu: Menu | null) {
+    this.onEventMenuDelSubject.next(menu);
   }
 
   getListMenu() {
@@ -27,7 +33,7 @@ export class AppService {
     this.listMenuSubject.next(menus);
   }
 
-  setMenuActive(menu: Menu) {
+  setMenuActive(menu: Menu| null) {
     this.menuActiveSubject.next(menu);
   }
 
@@ -47,5 +53,9 @@ export class AppService {
 
   updateMenu(id: string , name: string) : Observable<any> {
     return this.http.put<any>(`${this.chatUrl}/api/Menus?id=${id}&name=${name}`,{});
+  }
+
+  deleteMenu(id: string): Observable<any> {
+    return this.http.delete(`${this.chatUrl}/api/Menus?id=${id}`);
   }
 }

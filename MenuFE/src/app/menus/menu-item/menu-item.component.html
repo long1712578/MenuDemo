@@ -1,5 +1,5 @@
 <!-- SubMenu -->
-<li *ngIf="menu.menuDtos.length > 0; else menuItem" nz-submenu nzTitle="{{menu.name}}" (click)="selecMenu(menu); $event.stopPropagation()">
+<li *ngIf=" menu.menuDtos && menu.menuDtos.length > 0; else menuItem" nz-submenu nzTitle="{{menu.name}}" (click)="selecMenu(menu); $event.stopPropagation()">
     <ul *ngFor="let item of menu.menuDtos">
       <app-menu-item [menu]="item"></app-menu-item>
     </ul>

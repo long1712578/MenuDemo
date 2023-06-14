@@ -21,6 +21,17 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPadingMenu();
+    this.listenEventMenuDel();
+  }
+
+  listenEventMenuDel() {
+    this.appService.onEventMenuDel$.subscribe({
+      next: (menuDel: Menu | null) => {
+        if(menuDel) {
+          this.getPadingMenu();
+        }
+      }
+    })
   }
 
   getPadingMenu() {

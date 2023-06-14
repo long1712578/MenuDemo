@@ -12,6 +12,8 @@ export class MenuInfomationComponent implements OnInit {
   menu!: Menu|null;
   name = '';
   isUpdateDisabled = true;
+  menuName = '';
+  isAddMenu = false;
   constructor(private appService: AppService) { }
 
   ngOnInit(): void {
@@ -43,5 +45,37 @@ export class MenuInfomationComponent implements OnInit {
         }
       }
     })
+  }
+
+  deleteMenu() {
+    this.appService.deleteMenu(this.menu?.id as string ).subscribe({
+      next: () => {
+        this.appService.setEventMenuDel(this.menu);
+        this.menu = null;
+      }
+    })
+  }
+
+  handleCancel(): void {
+    this.menuName = '';
+    this.isAddMenu = false;
+  }
+
+  handleOk(): void {
+    this.isAddMenu = false;
+    this.appService.createMenu(this.menuName, this.menu?.id).subscribe({
+      next: (menu) => {
+        const menuNew =menu;
+        this.menu?.menuDtos.push(menuNew);
+        this.menuName = '';
+      },
+      error: () => {
+        this.menuName = '';
+      }
+    })
+  }
+
+  showModalAddMenu(): void {
+    this.isAddMenu = true;
   }
 }
