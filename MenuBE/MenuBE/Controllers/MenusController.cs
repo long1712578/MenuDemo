@@ -14,6 +14,7 @@ namespace MenuBE.Controllers
     {
         private readonly IMapper _mapper;
         private readonly IMenuService _menuService;
+
         public MenusController(IMapper mapper, IMenuService menuService)
         {
             _mapper = mapper;
